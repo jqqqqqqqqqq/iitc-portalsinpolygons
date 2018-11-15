@@ -395,7 +395,7 @@ plugin_info.pluginId = 'wise-portalsinpolygons';
         8: "Level 8 Portals",
         Resistance: "Resistance",
         Enlightened: "Enlightened",
-        Neutral: "Unclaimed Portals"
+        Neutral: "Unclaimed/Placeholder Portals"
     };
 
     /**
