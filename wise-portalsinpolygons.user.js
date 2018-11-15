@@ -816,7 +816,7 @@ plugin_info.pluginId = 'wise-portalsinpolygons';
         var keep;
         keep = (window.isLayerGroupDisplayed(self.layerChooserName[portal.options.level]) &&
                 ((portal.options.team == window.TEAM_RES && window.isLayerGroupDisplayed(self.layerChooserName.Resistance)) ||
-                 (portal.options.team == window.TEAM_RES && window.isLayerGroupDisplayed(self.layerChooserName.Enlightened)) ||
+                 (portal.options.team == window.TEAM_ENL && window.isLayerGroupDisplayed(self.layerChooserName.Enlightened)) ||
                  (portal.options.team == window.TEAM_NONE && window.isLayerGroupDisplayed(self.layerChooserName.Neutral))));
         return keep;
     };
