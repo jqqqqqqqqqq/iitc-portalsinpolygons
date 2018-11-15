@@ -2,7 +2,7 @@
 // @id             iitc-plugin-portalsinpolygons@hayeswise
 // @name           IITC plugin: Portals-in-Polygons
 // @category       Layer
-// @version        1.2017.02.24
+// @version        1.2018.11.15
 // @namespace      https://github.com/hayeswise/ingress-intel-total-conversion
 // @description    Display a list of portals in, on on the perimeter of, polygons and circles, and on lines.  Use the layer group check boxes to filter the portals.
 // @updateURL      https://github.com/hayeswise/iitc-shadowops/raw/master/dist/plugins/wise-portalsinpolygons.meta.js
@@ -12,7 +12,7 @@
 // @match          https://intel.ingress.com/*
 // @match          http://intel.ingress.com/*
 // @require        https://rawgit.com/hayeswise/Leaflet.PointInPolygon/v1.0.0/wise-leaflet-pip.js
-// @author         Hayeswise
+// @author         Hayeswise, jqqqqqqqqqq
 // @grant          none
 // ==/UserScript==
 // MIT License, Copyright (c) 2017 Brian Hayes ("Hayeswise")
@@ -384,7 +384,7 @@ plugin_info.pluginId = 'wise-portalsinpolygons';
      * @type {Object.<string, string>}
 	 */
     self.layerChooserName = {
-        0: "Unclaimed Portals",
+        0: "Unclaimed/Placeholder Portals",
         1: "Level 1 Portals",
         2: "Level 2 Portals",
         3: "Level 3 Portals",
@@ -719,9 +719,9 @@ plugin_info.pluginId = 'wise-portalsinpolygons';
             var keep;
             var portal = portals[guid];
             keep = (window.isLayerGroupDisplayed(self.layerChooserName[portal.options.data.level]) &&
-                    ((portal.options.data.team === "R" && window.isLayerGroupDisplayed(self.layerChooserName.Resistance)) ||
-                     (portal.options.data.team === "E" && window.isLayerGroupDisplayed(self.layerChooserName.Enlightened)) ||
-                     (portal.options.data.team === "N" && window.isLayerGroupDisplayed(self.layerChooserName.Neutral))));
+                    ((portal.options.team == window.TEAM_RES && window.isLayerGroupDisplayed(self.layerChooserName.Resistance)) ||
+                     (portal.options.team == window.TEAM_ENL && window.isLayerGroupDisplayed(self.layerChooserName.Enlightened)) ||
+                     (portal.options.team == window.TEAM_NONE && window.isLayerGroupDisplayed(self.layerChooserName.Neutral))));
             return keep;
         });
         return guids;
@@ -815,9 +815,9 @@ plugin_info.pluginId = 'wise-portalsinpolygons';
     self.isPortalDisplayed = function (portal) {
         var keep;
         keep = (window.isLayerGroupDisplayed(self.layerChooserName[portal.options.level]) &&
-                ((portal.options.data.team === "R" && window.isLayerGroupDisplayed(self.layerChooserName.Resistance)) ||
-                 (portal.options.data.team === "E" && window.isLayerGroupDisplayed(self.layerChooserName.Enlightened)) ||
-                 (portal.options.data.team === "N" && window.isLayerGroupDisplayed(self.layerChooserName.Neutral))));
+                ((portal.options.team == window.TEAM_RES && window.isLayerGroupDisplayed(self.layerChooserName.Resistance)) ||
+                 (portal.options.team == window.TEAM_RES && window.isLayerGroupDisplayed(self.layerChooserName.Enlightened)) ||
+                 (portal.options.team == window.TEAM_NONE && window.isLayerGroupDisplayed(self.layerChooserName.Neutral))));
         return keep;
     };
 
@@ -880,5 +880,6 @@ var info = {};
 if (typeof GM_info !== 'undefined' && GM_info && GM_info.script) info.script = {version: GM_info.script.version, name: GM_info.script.name, description: GM_info.script.description };
 script.appendChild(document.createTextNode('('+ wrapper +')('+JSON.stringify(info)+');'));
 (document.body || document.head || document.documentElement).appendChild(script);
+
 
 
